@@ -29,6 +29,8 @@ C = Canvas(root, bg="white", height=1400, width=2400)
 
 C.pack()
 
+#Create buttons that will be used in the game
+#Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons():
     rectstartx = 700
     rectendx = 800
@@ -41,6 +43,9 @@ def createbuttons():
         C.create_rectangle(rectstartx,rectcurrenty,rectendx, rectcurrenty + 40, fill=buttoncolor[x])
         x = x + 1
 
+#Create labesls that will be used for our buttons
+#Labels placed to side of buttton to avoid object index clash when button is clicked
+#Labels are created after buttons to insure that buttons are assigned the correct index
 def createbuttonlabels():
     C.create_text(900, 30, text="Select a Color", font=("Helvetica",14))
     C.create_text(900, 80, text="Fill Matrix Black", font=("Helvetica",14))
@@ -50,9 +55,10 @@ def createbuttonlabels():
     C.create_text(900, 280, text="Save To File", font=("Helvetica",14))
     C.create_text(900, 330, text="Pull From File", font=("Helvetica",14))
     C.create_text(900, 380, text="Paintbrush", font=("Helvetica",14))
-    
+
 
 #Create the grid.  Simultaneously add to output array
+#Create grid is called first to insure that box object have the correct indices
 def creategrid():
     global colorcoords
     global coordcomp
@@ -83,9 +89,13 @@ def mouseover(event):
                 changeboxcolor(rect,currentcolor)
 
 #These function calls kicks off program by creating grid and buttons for use
-creategrid()
-createbuttons()
-createbuttonlabels()
+def startprogram():
+	creategrid()
+	createbuttons()
+	createbuttonlabels()
+
+#kicks off the program by creating grid, buttons and labels
+startprogram()
 
 #Check for a click event
 #Handles all click events
@@ -141,14 +151,14 @@ def getfilecoords():
     rawname = getfilename()
     abs_file_path = fullfilepath(rawname)
     file = open(abs_file_path, "r")
-    for line in file:       
+    for line in file:
         mysplit = line.split(',')
         for something in mysplit:
             colonsplit = something.split(':')
             if colonsplit[0] != '':
                 coord = converttonumber(colonsplit[0])
                 changeboxcolor(coord,colonsplit[1])
-            
+
 
 
 #print coordinates to file located in python project subdirectory
