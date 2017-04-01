@@ -18,7 +18,7 @@ currentcolor = "blue"
 #Initialize tkinter
 root = Tk(  )
 
-C = Canvas(root, bg="blue", height=1400, width=2400)
+C = Canvas(root, bg="white", height=1400, width=2400)
 
 C.pack()
 
@@ -191,6 +191,20 @@ C.create_rectangle(1650,800,1800,900, fill="green")
 #Recall contents from file and display on screen
 # reference tag 1031
 C.create_rectangle(1650,950,1800,1050, fill="brown")
+
+C.create_text(2000, 100, text="Random Color", font=("Helvetica",18))
+
+C.create_text(2020, 250, text="Fill Matrix Black", font=("Helvetica",18))
+
+C.create_text(2020, 400, text="Fill Matrix Color", font=("Helvetica",18))
+
+C.create_text(1980, 550, text="Temp Save", font=("Helvetica",18))
+
+C.create_text(2000, 700, text="Temp Display", font=("Helvetica",18))
+
+C.create_text(2000, 850, text="Save To File", font=("Helvetica",18))
+
+C.create_text(2020, 1000, text="Pull From File", font=("Helvetica",18))
 
 #Bind click event to canvas objects
 C.bind("<Button-1>", click)
