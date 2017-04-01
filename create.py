@@ -1,9 +1,12 @@
-
 #Purpose of this script is to control all UI interaction
 from tkinter import *
 import random
 import re
 import os
+import platform
+
+#Determine which platform is run to filepath conventions
+myplatform = platform.system()
 
 #Set our global variables
 #colorcoords used to associate colors with coordinates
@@ -131,12 +134,16 @@ def printcoords(filename):
 
 #Get full path name for files
 def fullfilepath(filename):
-	ext = ".txt"
-	fullfilename = filename + ext
-	script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-	rel_path = "pictures/" + fullfilename
-	abs_file_path = os.path.join(script_dir, rel_path)
-	return abs_file_path
+    global myplatform
+    ext = ".txt"
+    fullfilename = filename + ext
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    if myplatform == 'Linux':
+        rel_path = "pictures/" + fullfilename
+    elif myplatform == 'Windows':
+        rel_path = "pictures\\" + fullfilename
+    abs_file_path = os.path.join(script_dir, rel_path)
+    return abs_file_path
 
 #Get user input to obtain filename
 def getfilename():
