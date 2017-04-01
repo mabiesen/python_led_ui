@@ -14,9 +14,11 @@ coordcomp = {}
 livepicturestorage = {}
 fromfile = {}
 currentcolor = "blue"
+paintbrushon = False
 
 #Initialize tkinter
 root = Tk(  )
+root.title("User Interface for 32 x 32 LED Display")
 
 C = Canvas(root, bg="white", height=1400, width=2400)
 
@@ -35,11 +37,20 @@ def creategrid():
             y1 = 10 + (r*40)
             x2 = x1 + 40
             y2 = y1 + 40
-            C.create_rectangle(x1,y1,x2,y2, fill="black", outline="white")
             thiscoord = letter + str(c+1)
+            box = C.create_rectangle(x1,y1,x2,y2, fill="black", outline="white", tags= thiscoord)
+            C.tag_bind(box,'<Leave>',mouseover)
             colorcoords[thiscoord] = "black"
             coordcomp[thiscoord] = x
             x = x + 1
+
+#Paint brush event
+def mouseover(event):
+    if paintbrushon == True:
+        if C.find_withtag(CURRENT):
+            rect = C.find_withtag("current")[0]
+            if rect < 1025:
+                changeboxcolor(rect,currentcolor)
 
 #This function call kicks off program by creating grid for use
 creategrid()
@@ -48,6 +59,7 @@ creategrid()
 #Handles all click events
 def click(event):
     global colorcoords
+    global paintbrushon
     if C.find_withtag(CURRENT):
         rect = C.find_withtag("current")[0]
         if rect < 1025:
@@ -74,6 +86,11 @@ def click(event):
             printcoords(filename)
         elif rect == 1031:
             getfilecoords()
+        elif rect == 1032:
+            if paintbrushon == False:
+                paintbrushon = True
+            else:
+                paintbrushon = False
 
 
 #Continuing the click event checker...
@@ -192,6 +209,10 @@ C.create_rectangle(1650,800,1800,900, fill="green")
 # reference tag 1031
 C.create_rectangle(1650,950,1800,1050, fill="brown")
 
+#Recall contents from file and display on screen
+# reference tag 1032
+C.create_rectangle(1650,1100,1800,1200, fill="blue")
+
 C.create_text(2000, 100, text="Random Color", font=("Helvetica",18))
 
 C.create_text(2020, 250, text="Fill Matrix Black", font=("Helvetica",18))
@@ -206,8 +227,13 @@ C.create_text(2000, 850, text="Save To File", font=("Helvetica",18))
 
 C.create_text(2020, 1000, text="Pull From File", font=("Helvetica",18))
 
+C.create_text(1980, 1150, text="Paintbrush", font=("Helvetica",18))
+
 #Bind click event to canvas objects
 C.bind("<Button-1>", click)
+
+#Bind mouseover event to canvas objects
+#C.bind( "<B1-Motion>", mouseover)
 
 #End of Tkinter loop
 root.mainloop(  )
