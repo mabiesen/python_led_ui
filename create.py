@@ -1,5 +1,7 @@
 #Purpose of this script is to control all UI interaction
 from tkinter import *
+from tkinter.colorchooser import *
+
 import random
 import re
 import os
@@ -16,7 +18,7 @@ colorcoords = {}
 coordcomp = {}
 livepicturestorage = {}
 fromfile = {}
-currentcolor = "blue"
+currentcolor = "#5595AB"
 paintbrushon = False
 
 #Initialize tkinter
@@ -41,9 +43,9 @@ def creategrid():
             x2 = x1 + 40
             y2 = y1 + 40
             thiscoord = letter + str(c+1)
-            box = C.create_rectangle(x1,y1,x2,y2, fill="black", outline="white", tags= thiscoord)
+            box = C.create_rectangle(x1,y1,x2,y2, fill="#000", outline="white", tags= thiscoord)
             C.tag_bind(box,'<Leave>',mouseover)
-            colorcoords[thiscoord] = "black"
+            colorcoords[thiscoord] = "#000"
             coordcomp[thiscoord] = x
             x = x + 1
 
@@ -185,7 +187,16 @@ def converttoletter(coord):
 def changecurrentcolor():
     global currentcolor
     color = ["red", "orange", "yellow", "green", "blue", "violet"]
-    currentcolor = random.choice(color)
+    selectedhex = getColor()
+    currentcolor = selectedhex
+
+def getColor():
+    global currentcolor
+    selectedcolor = askcolor()
+    selectedhex = selectedcolor[1]
+    if selectedhex is None:
+        selectedhex = currentcolor
+    return selectedhex
 
 
 #rectangle to change the current color
@@ -220,7 +231,7 @@ C.create_rectangle(1650,950,1800,1050, fill="brown")
 # reference tag 1032
 C.create_rectangle(1650,1100,1800,1200, fill="blue")
 
-C.create_text(2000, 100, text="Random Color", font=("Helvetica",18))
+C.create_text(2000, 100, text="Select a Color", font=("Helvetica",18))
 
 C.create_text(2020, 250, text="Fill Matrix Black", font=("Helvetica",18))
 
