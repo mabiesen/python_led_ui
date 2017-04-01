@@ -75,7 +75,7 @@ def click(event):
         elif rect == 1026:
             x = 1024
             while x > 0:
-                changeboxcolor(x, "black")
+                changeboxcolor(x, "#000")
                 x = x-1
         elif rect == 1027:
             x = 1024
@@ -118,8 +118,9 @@ def getfilecoords():
         mysplit = line.split(',')
         for something in mysplit:
             colonsplit = something.split(':')
-            coord = converttonumber(colonsplit[0])
-            changeboxcolor(coord,colonsplit[1])
+            if colonsplit[0] != '':
+                coord = converttonumber(colonsplit[0])
+                changeboxcolor(coord,colonsplit[1])
             
 
 
@@ -129,7 +130,7 @@ def printcoords(filename):
     abs_file_path = fullfilepath(filename)
     f = open(abs_file_path,"w+")
     for coord, color in colorcoords.items():
-        if color != "black":
+        if color != "#000":
             f.write("%s:%s," % (coord,color))
     f.close
     print("File saved")
@@ -159,7 +160,7 @@ def copyimagecoords():
     livepicturestorage = {}
     print(len(livepicturestorage))
     for coord, color in colorcoords.items():
-        if color != "black":
+        if color != "#000":
             livepicturestorage[coord] = color
 
 #Display picture from livestorage
@@ -186,7 +187,6 @@ def converttoletter(coord):
 #Change the working color
 def changecurrentcolor():
     global currentcolor
-    color = ["red", "orange", "yellow", "green", "blue", "violet"]
     selectedhex = getColor()
     currentcolor = selectedhex
 
