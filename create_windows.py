@@ -29,7 +29,6 @@ matrixspace = 40
 colorcoords = {}
 coordcomp = {}
 livepicturestorage = {}
-fromfile = {}
 currentcolor = "#5595AB"
 paintbrushon = False
 
@@ -192,7 +191,6 @@ def changeboxcolor(rect, color):
 
 #use file coordinates to populate pictures on screen
 def getfilecoords():
-    fromfile = {}
     rawname = getfilename()
     abs_file_path = fullfilepath(rawname)
     file = open(abs_file_path, "r")

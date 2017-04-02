@@ -1,6 +1,11 @@
 #Coordinates are being saved in hexadecimal digits
 #The Adafruit led matrix uses rgb(7,7,7)
+import os
+import platform
+import math
 
+#Determine which platform is run to filepath conventions
+myplatform = platform.system()
 #from rgbmatrix import Adafruit_RGBmatrix
 
 #Hex to RGB 255
@@ -12,21 +17,69 @@ def hextorgb(hex):
 
 #RGB(255,255,255) to RGB(7,7,7)
 def matrixrgb(myrgb):
-    x = 0
-    while x < len(myrgb):
-	rgbmod = myrgb[x]%7
-	rgbdiv = myrgb/7 - rgbmod
-	myrgb[x] = rgbdiv
-	x = x + 1
-    return myrgb
+    myrgb = (myrgb/255)*7
+    rgbdiv = math.ceil(myrgb)
+    return rgbdiv
+
+#Convert from letter to number
+def converttoxy(coord):
+	alphabetrows = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F']
+	x, y = coord[:1], coord[1:]
+	y = int(y) - 1
+	x = alphabetrows.index(x)
+	xycoords = (x,y)
+	print (xycoords)
+	return xycoords
+
+#Get full path name for files
+def myfullfilepath(filename):
+    global myplatform
+    ext = ".txt"
+    fullfilename = filename + ext
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    if myplatform == 'Linux':
+        rel_path = "pictures/" + fullfilename
+    elif myplatform == 'Windows':
+        rel_path = "pictures\\" + fullfilename
+    abs_file_path = os.path.join(script_dir, rel_path)
+    return abs_file_path
+
+#Get user input to obtain filename
+def getmyfilename():
+    filename = input('Enter your desired filename: ')
+    return filename
+
+#Open file and read contents to matrix
+def displaymyfilecoords():
+    fromfile = ()
+    rawname = getmyfilename()
+    abs_file_path = myfullfilepath(rawname)
+    file = open(abs_file_path, "r")
+    for line in file:
+        mysplit = line.split(',')
+        for something in mysplit:
+            colonsplit = something.split(':')
+            if colonsplit[0] != '':
+                xycoords = converttoxy(colonsplit[0])
+                x = xycoords[0]
+                y = xycoords[1]
+                thiscolorrgb = hextorgb(colonsplit[1])
+                r = matrixrgb(thiscolorrgb[0])
+                g = matrixrgb(thiscolorrgb[1])
+                b = matrixrgb(thiscolorrgb[2])
+                print(x)
+                print(y)
+                print(r)
+                print(g)
+                print(b)
+
+displaymyfilecoords()
+
 
 #Display coords on led matrix
-def lightupmatrix(xcoord,ycoord,myrgb):
-	red = myrgb[0]
-	green = myrgb[1]
-	blue = myrgb[2]
-	matrix.SetPixel(xcoord,ycoord,red,green,blue)
-	#matrix.SetPixel() vs matrix.drawPixel()?
-
-mytuple = hextorgb('#ffffff')
-print(mytuple)
+#def lightupmatrix(xcoord,ycoord,myrgb):
+#	red = myrgb[0]
+#	green = myrgb[1]
+#	blue = myrgb[2]
+#	matrix.SetPixel(xcoord,ycoord,red,green,blue)
+#	matrix.SetPixel() vs matrix.drawPixel()?
