@@ -9,4 +9,4 @@ UI portion of the project is functional at this time in Python3.  To use:
 The LED matrix display portion of the project has been created in Python 2.7.  Adafruit's library has not yet adapted to Python 3.
 
 
-My solutions to this dilemma currently is to recreate the UI in Python 2.7, which shouldn't require too many changes. Once completed, I will create and option for a live display environment.
+My solution to this dilemma is to use try and except statements to pull in libraries with the compatible import statements, allowing the UI environment to run on bot python 2 and 3.  I will also have an if statement that checks for the user's python version before attempting to access the Adafruit matrix library.

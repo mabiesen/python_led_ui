@@ -34,13 +34,16 @@ labelspace = 50
 matrixspace = 40
 picturesdir = "pictures/"
 
-#Set our global variables
+#Set our global variables that are not system dependent
 #colorcoords used to associate colors with coordinates
-#coord comp used to associate tkinter.CURRENT integer with alphanumerical
+#coord comp used to associate tkinter.CURRENT integer tag with alphanumerical
+#temppicturestorage is for the tempdisplay module
+#currentcolor holds starting color until user selects a new color
+#paintbrushon variable used as a toggle switch for paintbrush functionality
 #Note: the braces indicate empty dictionaries, not arrays
 colorcoords = {}
 coordcomp = {}
-livepicturestorage = {}
+temppicturestorage = {}
 currentcolor = "#5595AB"
 paintbrushon = False
 
@@ -116,7 +119,7 @@ def click(event):
                 changeboxcolor(x, currentcolor)
                 x = x-1
         elif rect ==1028:
-            copyimagecoords()
+            copytempcoords()
         elif rect == 1029:
             displayimage()
         elif rect == 1030:
@@ -182,8 +185,6 @@ def startprogram():
 #kicks off the program by creating grid, buttons and labels
 startprogram()
 
-
-
 #...............................
 # All functions above this line helped to set up the program
 # Mouseover and click events placed at top since referenced in setup
@@ -244,28 +245,28 @@ def getfilename():
     return filename
 
 #Copy records to live storage
-def copyimagecoords():
+def copytempcoords():
     global colorcoords
-    global livepicturestorage
-    livepicturestorage = {}
+    global temppicturestorage
+    temppicturestorage = {}
     for coord, color in colorcoords.items():
         if color != "#000000":
-            livepicturestorage[coord] = color
+            temppicturestorage[coord] = color
 
 #Display picture from livestorage
 def displayimage():
-    global livepicturestorage
-    for coord, color in livepicturestorage.items():
+    global temppicturestorage
+    for coord, color in temppicturestorage.items():
            coord = converttonumber(coord)
            changeboxcolor(coord,color)
 
-#Convert from letter to number
+#Convert coordinates from letter to number
 def converttonumber(coord):
     global coordcomp
     mynumber = coordcomp[coord]
     return mynumber
 
-#Convert from number to letter
+#Convert coordinates from number to letter
 def converttoletter(coord):
     global coordcomp
     key=list(coordcomp.keys())[list(coordcomp.values()).index(coord)]
