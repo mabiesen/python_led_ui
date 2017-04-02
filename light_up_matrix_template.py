@@ -16,6 +16,7 @@ def hextorgb(hex):
     return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
 #RGB(255,255,255) to RGB(7,7,7)
+#NOT NECESSARY APPARENTLY
 def matrixrgb(myrgb):
     myrgb = (myrgb/255)*7
     rgbdiv = math.ceil(myrgb)
