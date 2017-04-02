@@ -61,7 +61,7 @@ def definesysvariables():
         labelstartx = 900
         labelstarty = 30
         labelspace = 50
-        matrixspace = 10
+        matrixspace = 30
     if myplatform == "Linux":
         buttonstartx = 1300
         buttonendx = 1400
