@@ -3,10 +3,10 @@
 import os
 import platform
 import math
+#from rgbmatrix import Adafruit_RGBmatrix
 
 #Determine which platform is run to filepath conventions
 myplatform = platform.system()
-#from rgbmatrix import Adafruit_RGBmatrix
 
 #Hex to RGB 255
 def hextorgb(hex):
@@ -28,7 +28,6 @@ def converttoxy(coord):
 	y = int(y) - 1
 	x = alphabetrows.index(x)
 	xycoords = (x,y)
-	print (xycoords)
 	return xycoords
 
 #Get full path name for files
@@ -36,6 +35,7 @@ def myfullfilepath(filename):
     global myplatform
     ext = ".txt"
     fullfilename = filename + ext
+    print(myplatform)
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     if myplatform == 'Linux':
         rel_path = "pictures/" + fullfilename
@@ -67,19 +67,6 @@ def displaymyfilecoords():
                 r = matrixrgb(thiscolorrgb[0])
                 g = matrixrgb(thiscolorrgb[1])
                 b = matrixrgb(thiscolorrgb[2])
-                print(x)
-                print(y)
-                print(r)
-                print(g)
-                print(b)
+                #matrix.SetPixel(x,y,r,g,b)
 
 displaymyfilecoords()
-
-
-#Display coords on led matrix
-#def lightupmatrix(xcoord,ycoord,myrgb):
-#	red = myrgb[0]
-#	green = myrgb[1]
-#	blue = myrgb[2]
-#	matrix.SetPixel(xcoord,ycoord,red,green,blue)
-#	matrix.SetPixel() vs matrix.drawPixel()?
