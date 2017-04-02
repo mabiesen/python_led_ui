@@ -1,9 +1,20 @@
 #Purpose of this script is to control all UI interaction
-from tkinter import *
-from tkinter.colorchooser import *
+#This script is written in Python 2 form to cater to RPI LED matrix library
 
-import random
-import re
+#Python3 - from tkinter import *
+#Python2 - from Tkinter import *
+try:
+    from tkinter import *
+except ImportError:
+    from Tkinter import *
+
+#Python3 - from tkinter.colorchooser import *
+#Python2 - from tkColorChooser import *
+try:
+    from tkinter.colorchooser import *
+except ImportError:
+    from tkColorChooser import *
+
 import os
 import platform
 
@@ -21,6 +32,7 @@ labelstartx = 900
 labelstarty = 30
 labelspace = 50
 matrixspace = 40
+picturesdir = "pictures/"
 
 #Set our global variables
 #colorcoords used to associate colors with coordinates
@@ -35,9 +47,7 @@ paintbrushon = False
 #Initialize tkinter
 root = Tk(  )
 root.title("User Interface for 32 x 32 LED Display")
-
 C = Canvas(root, bg="white", height=1400, width=2400)
-
 C.pack()
 
 #define some system dependent variables
@@ -51,6 +61,7 @@ def definesysvariables():
     global labelstarty
     global labelspace
     global matrixspace
+    global picturesdir
     if myplatform == "Windows":
         buttonstartx = 700
         buttonendx = 800
@@ -61,6 +72,7 @@ def definesysvariables():
         labelstarty = 30
         labelspace = 50
         matrixspace = 20
+        picturesdir = "pictures\\"
     if myplatform == "Linux":
         buttonstartx = 1300
         buttonendx = 1400
@@ -71,6 +83,52 @@ def definesysvariables():
         labelstarty = 30
         labelspace = 50
         matrixspace = 40
+        picturesdir = "pictures/"
+
+#BOX ON ENTER EVENT
+def mouseover(event):
+    if paintbrushon == True:
+        if C.find_withtag(CURRENT):
+            rect = C.find_withtag("current")[0]
+            if rect < 1025:
+                changeboxcolor(rect,currentcolor)
+
+#CLICK EVENTS
+#Handles all click events
+def click(event):
+    global colorcoords
+    global paintbrushon
+    if C.find_withtag(CURRENT):
+        rect = C.find_withtag("current")[0]
+        if rect < 1025:
+            changeboxcolor(rect,currentcolor)
+            C.update_idletasks()
+        elif rect == 1025:
+            changecurrentcolor()
+        elif rect == 1026:
+            x = 1024
+            while x > 0:
+                changeboxcolor(x, "#000000")
+                x = x-1
+        elif rect == 1027:
+            x = 1024
+            while x > 0:
+                changeboxcolor(x, currentcolor)
+                x = x-1
+        elif rect ==1028:
+            copyimagecoords()
+        elif rect == 1029:
+            displayimage()
+        elif rect == 1030:
+            filename = getfilename()
+            printcoords(filename)
+        elif rect == 1031:
+            getfilecoords()
+        elif rect == 1032:
+            if paintbrushon == False:
+                paintbrushon = True
+            else:
+                paintbrushon = False
 
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
@@ -107,73 +165,35 @@ def creategrid():
             x2 = x1 + matrixspace
             y2 = y1 + matrixspace
             thiscoord = letter + str(c+1)
-            box = C.create_rectangle(x1,y1,x2,y2, fill="#000", outline="white", tags= thiscoord)
-            C.tag_bind(box,'<Leave>',mouseover)
-            colorcoords[thiscoord] = "#000"
+            box = C.create_rectangle(x1,y1,x2,y2, fill="#000000", outline="white", tags= thiscoord)
+            C.tag_bind(box,'<Enter>',mouseover)
+            colorcoords[thiscoord] = "#000000"
             coordcomp[thiscoord] = x
             x = x + 1
 
-
-#Paint brush event
-def mouseover(event):
-    if paintbrushon == True:
-        if C.find_withtag(CURRENT):
-            rect = C.find_withtag("current")[0]
-            if rect < 1025:
-                changeboxcolor(rect,currentcolor)
-
+#START PROGRAM
 #These function calls kicks off program by creating grid and buttons for use
+#I placed these calls down here, after the program has read the functions that are being called
 def startprogram():
     definesysvariables()
     creategrid()
     createbuttons()
     createbuttonlabels()
-
 #kicks off the program by creating grid, buttons and labels
 startprogram()
 
-#Check for a click event
-#Handles all click events
-def click(event):
-    global colorcoords
-    global paintbrushon
-    if C.find_withtag(CURRENT):
-        rect = C.find_withtag("current")[0]
-        if rect < 1025:
-            changeboxcolor(rect,currentcolor)
-            C.update_idletasks()
-        elif rect == 1025:
-            changecurrentcolor()
-        elif rect == 1026:
-            x = 1024
-            while x > 0:
-                changeboxcolor(x, "#000")
-                x = x-1
-        elif rect == 1027:
-            x = 1024
-            while x > 0:
-                changeboxcolor(x, currentcolor)
-                x = x-1
-        elif rect ==1028:
-            copyimagecoords()
-        elif rect == 1029:
-            displayimage()
-        elif rect == 1030:
-            filename = getfilename()
-            printcoords(filename)
-        elif rect == 1031:
-            getfilecoords()
-        elif rect == 1032:
-            if paintbrushon == False:
-                paintbrushon = True
-            else:
-                paintbrushon = False
 
 
-#Continuing the click event checker...
+#...............................
+# All functions above this line helped to set up the program
+# Mouseover and click events placed at top since referenced in setup
+# C offers prototyping for this issue, not certain if Python does
+#
+#All functions below this line are related to in-program events
+#...............................
 
 
-#Change box color
+#Change box color.  Paints the box a new color
 def changeboxcolor(rect, color):
 	global colorcoords
 	coord = converttoletter(rect)
@@ -194,34 +214,33 @@ def getfilecoords():
                 changeboxcolor(coord,colonsplit[1])
 
 
-
 #print coordinates to file located in python project subdirectory
 def printcoords(filename):
     global colorcoords
     abs_file_path = fullfilepath(filename)
     f = open(abs_file_path,"w+")
     for coord, color in colorcoords.items():
-        if color != "#000":
+        if color != "#000000":
             f.write("%s:%s," % (coord,color))
     f.close
     print("File saved")
 
 #Get full path name for files
 def fullfilepath(filename):
-    global myplatform
     ext = ".txt"
     fullfilename = filename + ext
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    if myplatform == 'Linux':
-        rel_path = "pictures/" + fullfilename
-    elif myplatform == 'Windows':
-        rel_path = "pictures\\" + fullfilename
+    rel_path = picturesdir + fullfilename
     abs_file_path = os.path.join(script_dir, rel_path)
     return abs_file_path
 
 #Get user input to obtain filename
 def getfilename():
-    filename = input('Enter your desired filename: ')
+    if sys.version_info[:2] <= (2, 7):
+        get_input = raw_input
+    else:
+        get_input = input
+    filename = get_input('Enter your desired filename: ')
     return filename
 
 #Copy records to live storage
@@ -229,15 +248,13 @@ def copyimagecoords():
     global colorcoords
     global livepicturestorage
     livepicturestorage = {}
-    print(len(livepicturestorage))
     for coord, color in colorcoords.items():
-        if color != "#000":
+        if color != "#000000":
             livepicturestorage[coord] = color
 
 #Display picture from livestorage
 def displayimage():
     global livepicturestorage
-    print(len(livepicturestorage))
     for coord, color in livepicturestorage.items():
            coord = converttonumber(coord)
            changeboxcolor(coord,color)
@@ -245,7 +262,6 @@ def displayimage():
 #Convert from letter to number
 def converttonumber(coord):
     global coordcomp
-    print(coord)
     mynumber = coordcomp[coord]
     return mynumber
 
@@ -261,6 +277,7 @@ def changecurrentcolor():
     selectedhex = getColor()
     currentcolor = selectedhex
 
+#Color selection from Tkinter colorchooser module
 def getColor():
     global currentcolor
     selectedcolor = askcolor()
@@ -269,13 +286,20 @@ def getColor():
         selectedhex = currentcolor
     return selectedhex
 
+#LIVE WORK WITH LED MATRIX DISPLAY
+#Notes for the livereading function are generalized
+#Read all coordinates live from create.py
+#Prior to the live reading, coordinates must be submitted individually
+#Coordinates will need to be converted before use
+#On close I will need to clear the matrix screen
+def livereading():
+    a=1
 
 
-#Bind click event to canvas objects
+
+#Bind click event to all canvas objects
 C.bind("<Button-1>", click)
 
-#Bind mouseover event to canvas objects
-#C.bind( "<B1-Motion>", mouseover)
 
 #End of Tkinter loop
 root.mainloop(  )
