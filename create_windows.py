@@ -32,29 +32,35 @@ C.pack()
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons():
-    rectstartx = 700
-    rectendx = 800
-    rectstarty = 10
-    rectyheight = 40
+    if myplatform == "Windows":
+        rectstartx = 700
+        rectendx = 800
+        rectstarty = 10
+        rectyheight = 40
+        space = 50
+    elif myplatform == "Linux":
+        rectstartx = 700
+        rectendx = 800
+        rectstarty = 10
+        rectyheight = 40
+        space = 50
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
     x=0
     while x < 8:
-        rectcurrenty = rectstarty + (x * 50)
-        C.create_rectangle(rectstartx,rectcurrenty,rectendx, rectcurrenty + 40, fill=buttoncolor[x])
+        rectcurrenty = rectstarty + (x * space)
+        C.create_rectangle(rectstartx,rectcurrenty,rectendx, rectcurrenty + rectyheight, fill=buttoncolor[x])
         x = x + 1
 
 #Create labesls that will be used for our buttons
 #Labels placed to side of buttton to avoid object index clash when button is clicked
 #Labels are created after buttons to insure that buttons are assigned the correct index
 def createbuttonlabels():
-    C.create_text(900, 30, text="Select a Color", font=("Helvetica",14))
-    C.create_text(900, 80, text="Fill Matrix Black", font=("Helvetica",14))
-    C.create_text(900, 130, text="Fill Matrix Color", font=("Helvetica",14))
-    C.create_text(900, 180, text="Temp Save", font=("Helvetica",14))
-    C.create_text(900, 230, text="Temp Display", font=("Helvetica",14))
-    C.create_text(900, 280, text="Save To File", font=("Helvetica",14))
-    C.create_text(900, 330, text="Pull From File", font=("Helvetica",14))
-    C.create_text(900, 380, text="Paintbrush", font=("Helvetica",14))
+	mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
+	x = 0
+	space = 50
+	while x < 8:
+		C.create_text(900,30 + (x * space), text=mylabels[x], font=("Helvetica",14))
+		x = x + 1
 
 
 #Create the grid.  Simultaneously add to output array
