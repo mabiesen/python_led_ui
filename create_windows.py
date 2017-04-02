@@ -10,6 +10,18 @@ import platform
 #Determine which platform is run to filepath conventions
 myplatform = platform.system()
 
+#Set sysvariables globally
+#THESE VALUES MEAN NOTHING, this is being done to insure variables global
+buttonstartx = 1300
+buttonendx = 1400
+buttonstarty = 10
+buttonyheight = 40
+buttonspace = 50
+labelstartx = 900
+labelstarty = 30
+labelspace = 50
+matrixspace = 40
+
 #Set our global variables
 #colorcoords used to associate colors with coordinates
 #coord comp used to associate tkinter.CURRENT integer with alphanumerical
@@ -29,55 +41,81 @@ C = Canvas(root, bg="white", height=1400, width=2400)
 
 C.pack()
 
+#define some system dependent variables
+def definesysvariables():
+    global buttonstartx
+    global buttonendx
+    global buttonstarty
+    global buttonyheight
+    global buttonspace
+    global labelstartx
+    global labelstarty
+    global labelspace
+    global matrixspace
+    if myplatform == "Windows":
+        buttonstartx = 700
+        buttonendx = 800
+        buttonstarty = 10
+        buttonyheight = 40
+        buttonspace = 50
+        labelstartx = 900
+        labelstarty = 30
+        labelspace = 50
+        matrixspace = 10
+    if myplatform == "Linux":
+        buttonstartx = 1300
+        buttonendx = 1400
+        buttonstarty = 10
+        buttonyheight = 40
+        buttonspace = 50
+        labelstartx = 1580
+        labelstarty = 30
+        labelspace = 50
+        matrixspace = 40
+
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons():
-    if myplatform == "Windows":
-        rectstartx = 700
-        rectendx = 800
-        rectstarty = 10
-        rectyheight = 40
-        space = 50
-    elif myplatform == "Linux":
-        rectstartx = 700
-        rectendx = 800
-        rectstarty = 10
-        rectyheight = 40
-        space = 50
+    global buttonstartx
+    global buttonendx
+    global buttonstarty
+    global buttonyheight
+    global buttonspace
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
     x=0
     while x < 8:
-        rectcurrenty = rectstarty + (x * space)
-        C.create_rectangle(rectstartx,rectcurrenty,rectendx, rectcurrenty + rectyheight, fill=buttoncolor[x])
+        buttoncurrenty = buttonstarty + (x * buttonspace)
+        C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x])
         x = x + 1
 
 #Create labesls that will be used for our buttons
 #Labels placed to side of buttton to avoid object index clash when button is clicked
 #Labels are created after buttons to insure that buttons are assigned the correct index
 def createbuttonlabels():
-	mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
-	x = 0
-	space = 50
-	while x < 8:
-		C.create_text(900,30 + (x * space), text=mylabels[x], font=("Helvetica",14))
-		x = x + 1
-
+    global labelstartx
+    global labelstarty
+    global labelspace
+    mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
+    x = 0
+    while x < 8:
+        C.create_text(labelstartx,labelstarty + (x * labelspace), text=mylabels[x], font=("Helvetica",14))
+        x = x + 1
 
 #Create the grid.  Simultaneously add to output array
 #Create grid is called first to insure that box object have the correct indices
 def creategrid():
     global colorcoords
     global coordcomp
-    distancevar = 20
+    global matrixspace
     alphabetrows = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F']
     x = 1
     for r in range(32):
         letter = alphabetrows[r]
         for c in range(32):
-            x1 = 10 + (c*distancevar)
-            y1 = 10 + (r*distancevar)
-            x2 = x1 + distancevar
-            y2 = y1 + distancevar
+            x1 = 10 + (c*matrixspace)
+            y1 = 10 + (r*matrixspace)
+            x2 = x1 + matrixspace
+            y2 = y1 + matrixspace
             thiscoord = letter + str(c+1)
             box = C.create_rectangle(x1,y1,x2,y2, fill="#000", outline="white", tags= thiscoord)
             C.tag_bind(box,'<Leave>',mouseover)
@@ -96,9 +134,10 @@ def mouseover(event):
 
 #These function calls kicks off program by creating grid and buttons for use
 def startprogram():
-	creategrid()
-	createbuttons()
-	createbuttonlabels()
+    definesysvariables()
+    creategrid()
+    createbuttons()
+    createbuttonlabels()
 
 #kicks off the program by creating grid, buttons and labels
 startprogram()
