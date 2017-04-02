@@ -75,11 +75,6 @@ def definesysvariables():
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons():
-    global buttonstartx
-    global buttonendx
-    global buttonstarty
-    global buttonyheight
-    global buttonspace
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
     x=0
     while x < 8:
@@ -91,9 +86,6 @@ def createbuttons():
 #Labels placed to side of buttton to avoid object index clash when button is clicked
 #Labels are created after buttons to insure that buttons are assigned the correct index
 def createbuttonlabels():
-    global labelstartx
-    global labelstarty
-    global labelspace
     mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
     x = 0
     while x < 8:
@@ -105,7 +97,6 @@ def createbuttonlabels():
 def creategrid():
     global colorcoords
     global coordcomp
-    global matrixspace
     alphabetrows = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F']
     x = 1
     for r in range(32):
