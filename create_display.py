@@ -26,7 +26,7 @@ if sys.version_info[:2] <= (2, 7):
 	if uinput == "y":
 		print("You selected yes.  Sounds great! The matrix library will be loaded")
 		livedisplay = True
-		#from rgbmatrix import Adafruit_RGBmatrix
+		from rgbmatrix import Adafruit_RGBmatrix
 		matrix = Adafruit_RGBmatrix(32,1)
 	else:
 		print("The matrix will not be utilized")
@@ -327,7 +327,6 @@ def hextorgb(hex):
 def converttoxy(coord):
 	alphabetrows = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F']
 	x, y = coord[:1], coord[1:]
-	y = int(y) - 1
 	x = alphabetrows.index(x)
 	xycoords = (x,y)
 	return xycoords
@@ -335,18 +334,19 @@ def converttoxy(coord):
 def livereading(coord, color):
 	xycoords = converttoxy(coord)
 	x = int(xycoords[0])
-	#error in x coord? backwards, correcting
-	if x > 16:
-		x = 16-(x-16)
-	else:
-		x = 16 + (16-x)
-
 	y = int(xycoords[1])
-	thiscolorrgb = hextorgb(colonsplit[1])
-	r = int(matrixrgb(thiscolorrgb[0]))
-	g = int(matrixrgb(thiscolorrgb[1]))
-	b = int(matrixrgb(thiscolorrgb[2]))
-	#matrix.SetPixel(x,y,r,g,b)
+	#error in x coord? backwards, correcting
+	if y > 16:
+		y = 16-(y-16)
+	else:
+		y = 16 + (16-y)
+
+
+	thiscolorrgb = hextorgb(color)
+	r = int(thiscolorrgb[0])
+	g = int(thiscolorrgb[1])
+	b = int(thiscolorrgb[2])
+	matrix.SetPixel(x,y,r,g,b)
 
 
 
