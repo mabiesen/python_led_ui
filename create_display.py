@@ -331,6 +331,12 @@ def livereading(colorcombo):
 	color = split[1]
 	xycoords = converttoxy(coord)
 	x = int(xycoords[0])
+	#error in x coord? backwards, correcting
+	if x > 16:
+		x = 16-(x-16)
+	else:
+		x = 16 + (16-x)
+
 	y = int(xycoords[1])
 	thiscolorrgb = hextorgb(colonsplit[1])
 	r = int(matrixrgb(thiscolorrgb[0]))
