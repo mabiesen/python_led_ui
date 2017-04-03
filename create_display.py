@@ -18,11 +18,14 @@ except ImportError:
 import os
 import platform
 
+livedisplay = False
+
 #Determine if user has active LED display
 if sys.version_info[:2] <= (2, 7):
 	uinput = raw_input("You have the requirements necessary to work with an LED display.  Would you like to use the LED display in real time?(y/n)")
 	if uinput == "y":
 		print("You selected yes.  Sounds great! The matrix library will be loaded")
+		livedisplay = True
 		#from rgbmatrix import Adafruit_RGBmatrix
 		matrix = Adafruit_RGBmatrix(32,1)
 	else:
@@ -206,11 +209,15 @@ startprogram()
 
 
 #Change box color.  Paints the box a new color
+#If user has opted for live display, displays to LED matrix
 def changeboxcolor(rect, color):
 	global colorcoords
 	coord = converttoletter(rect)
 	C.itemconfig(rect, fill=color)
 	colorcoords[coord] = color
+	if livedisplay == True:
+		livereading(coord, color)
+
 
 #use file coordinates to populate pictures on screen
 def getfilecoords():
@@ -325,10 +332,7 @@ def converttoxy(coord):
 	xycoords = (x,y)
 	return xycoords
 
-def livereading(colorcombo):
-	mysplit = colorcombo.split(':')
-	coord = split[0]
-	color = split[1]
+def livereading(coord, color):
 	xycoords = converttoxy(coord)
 	x = int(xycoords[0])
 	#error in x coord? backwards, correcting
