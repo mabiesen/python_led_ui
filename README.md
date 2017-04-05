@@ -1,4 +1,4 @@
-# Directions for Using the Python LED Program
+# Python-based Interface for Raspberry Pi LED Matrix
 
 
 **Soure code contributions to this project are welcomed!!!!!**
