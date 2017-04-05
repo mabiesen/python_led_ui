@@ -26,7 +26,7 @@ LED display portion of project is complete at this time on Python2.  To use:
 
 *NOTE: When using the paintbrush feature, click and hold to stop painting.  This is counterintuitive and is on my todo list*
 
-## Work To Be Done
+## Work To Be Done as of 4/5/2017
 
 1. Change buttons to actual buttons.  Currently they are painted rectangles that act as buttons.
 2. Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
