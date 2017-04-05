@@ -7,14 +7,14 @@ This project uses Python to provide a user interface for creating cool 32x32 LED
 
 Please insure you have Python installed prior to downloading this program.  If you intend to use the Adafruit matrix, you will need to download Python 2 specifically (at this time, that comes standard in the Raspberry Pi Noobs download https://www.raspberrypi.org/downloads/noobs/).
 
-UI portion of the project is functional at this time in Python 2 and 3.  To use:
-1. download the zip of this Project
-2. extract to an isolated folder
+#### UI portion of the project is functional at this time in Python 2 and 3.  To use:
+1. download the zip of this Project using the green button at the top right side of the page.
+2. extract to an isolated folder on your computer.
 3. Run the file titled create_display.py
 
-LED display portion of project is complete at this time on Python2.  To use:
-1. download the zip of the project
-2. extract contents to an isolated folder
+#### LED display portion of project is complete at this time on Python2.  To use:
+1. download the zip of the project using the green button at the top right side of the page.
+2. extract contents to an isolated folder on your computer
 3. download the zip of the adafruit matrix library found at the following link https://github.com/adafruit/rpi-rgb-led-matrix
 4. Extract the contents of this file to the folder that is housing the project
 5. Per the directions at the link, under the "Running" section, you will need to create a make file for this matrix library.  This is really easy and only takes two lines of code in the terminal.
