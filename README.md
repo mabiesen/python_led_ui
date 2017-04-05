@@ -7,7 +7,7 @@ This project uses Python to provide a user interface for creating cool 32x32 LED
 
 Please insure you have Python installed prior to downloading this program.  If you intend to use the Adafruit matrix, you will need to download Python 2 specifically (at this time, that comes standard in the Raspberry Pi Noobs download https://www.raspberrypi.org/downloads/noobs/).
 
-UI portion of the project is functional at this time in Python3.  To use:
+UI portion of the project is functional at this time in Python 2 and 3.  To use:
 1. download the zip of this Project
 2. extract to an isolated folder
 3. Run the file titled create_display.py
