@@ -1,5 +1,9 @@
-# python_led_ui
-Project to use python as a user interface for creating cool 32x32 LED Matrix displays
+# Directions for Using the Python LED Program
+
+
+This project uses Python to provide a user interface for creating cool 32x32 LED Matrix displays.  The project can be used in concert with the matrix or alone as a sort of painting program.
+
+## Directions for Download
 
 UI portion of the project is functional at this time in Python3.  To use:
 1. download the zip of this Project
@@ -18,7 +22,13 @@ LED display portion of project is complete at this time on Python2.  To use:
 
 *NOTE: At this time, you must refer to the Python shell(or your terminal) to save and retrieve stored file data*
 
-Project issue: Python 3 is not compatible with Adafruit matrix library
-Project issue: Python 2 and Python 3 have different input and import statements
+*NOTE: When using the paintbrush feature, click and hold to stop painting.  This is counterintuitive and is on my todo list*
 
-My solution to these dilemmas is to use try and except statements to pull in libraries with the compatible import statements, allowing the UI environment to run on both python 2 and 3.  I also have an if statement that checks for the user's python version before attempting to access the Adafruit matrix library.
+## Work To Be Done
+
+1. Change buttons to actual buttons.  Currently they are painted rectangles that act as buttons.
+2. Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
+3. I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
+4. Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
+5. Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective: potentially a change could be made to the program which affects the order in which our objects are created and thereby changes our indexed tags.  Using appropriate tags would also allow the code to be shortened as a conversion from "a1" format to indexed number would no longer be necessary.
+
