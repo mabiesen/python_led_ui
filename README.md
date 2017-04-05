@@ -36,4 +36,14 @@ LED display portion of project is complete at this time on Python2.  To use:
 6. Provide an area to show the current color.
 7. Allow user to "turn off" led square by right clicking.
 8. Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
+9. Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
+10. Integrate text display.  This would also be easy using the Adafruit Library's existing code.
+11. Add to mabiesen.github.io. Maybe a video iframe of the tutorial.
+12. ADD A TUTORIAL! It would be fun and provide added value:
+* First integrate the text features from Adafruit's library
+* Provide animated record functionality such that stored files can be displayed pixel-by-pixel to the matrix in the intended order, proviing the illusion of animation.
+* Create folder to store tutorial data
+* Create images and animations to display during the tutorial.
+* Write the code to display changes in action
+* Add a tutorial button
 
