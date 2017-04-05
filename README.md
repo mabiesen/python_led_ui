@@ -1,7 +1,7 @@
 # Directions for Using the Python LED Program
 
 
-This project uses Python to provide a user interface for creating cool 32x32 LED Matrix displays.  The project can be used in concert with the matrix or alone as a sort of painting program.
+This project uses Python to provide a user interface for creating cool 32x32 LED Matrix displays.  The project can be used in concert with the matrix or alone as a sort of painting program.  Improvements forthcoming! Please be patient as this was my first dive into Python's Tkinter.
 
 ## Directions for Download
 
