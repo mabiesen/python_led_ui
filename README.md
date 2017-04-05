@@ -35,4 +35,5 @@ LED display portion of project is complete at this time on Python2.  To use:
 5. Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective: potentially a change could be made to the program which affects the order in which our objects are created and thereby changes our indexed tags.  Using appropriate tags would also allow the code to be shortened as a conversion from "a1" format to indexed number would no longer be necessary.  Furthermore, doing this would afford the program an opportunity to change dimensions without concern in the event that someone has a 16x16 matrix.
 6. Provide an area to show the current color.
 7. Allow user to "turn off" led square by right clicking.
+8. Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
 
