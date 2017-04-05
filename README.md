@@ -16,6 +16,8 @@ LED display portion of project is complete at this time on Python2.  To use:
 7. Run the file titled create_display.py from the command line as a superuser
 8. When prompted, type 'y' to allow for real time use with the LED Matrix.
 
+*NOTE: At this time, you must refer to the Python shell(or your terminal) to save and retrieve stored file data*
+
 Project issue: Python 3 is not compatible with Adafruit matrix library
 Project issue: Python 2 and Python 3 have different input and import statements
 
