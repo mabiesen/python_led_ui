@@ -1,5 +1,6 @@
 # Python-based Interface for Raspberry Pi LED Matrix
 
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
 
 **Soure code contributions to this project are welcomed!!!!!**
 
