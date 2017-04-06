@@ -83,7 +83,7 @@ def definesysvariables():
         labelspace = 50
         matrixspace = 40
         picturesdir = "pictures/"
-	return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, labelstartx, labelstarty, labelspace, matrixspace)
+    return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, labelstartx, labelstarty, labelspace, matrixspace)
 
 #BOX ON ENTER EVENT
 def mouseover(event):
