@@ -291,17 +291,7 @@ def getColor():
 #This next section is for livedisplay only
 #.........................
 
-#LIVE WORK WITH LED MATRIX DISPLAY
-#Notes are generalized function are generalized
-#Read all coordinates live from create.py
-#Prior to the live reading, coordinates must be submitted individually
-#Coordinates will need to be converted before use
-#On close I will need to clear the matrix screen
-
-
-
-
-
+#LIVE WORK WITH LED MATRIX DISPLAY DONE IN LIVEMATRIX.PY
 
 
 #Bind click event to all canvas objects
