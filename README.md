@@ -31,17 +31,17 @@ Please insure you have Python installed prior to downloading this program.  If y
 ## Work To Be Done as of 4/5/2017
 
 - [x] Change buttons to actual buttons.  Currently they are painted rectangles that act as buttons.
-2. Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
-3. I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
-4. Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
-5. Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective: potentially a change could be made to the program which affects the order in which our objects are created and thereby changes our indexed tags.  Using appropriate tags would also allow the code to be shortened as a conversion from "a1" format to indexed number would no longer be necessary.  Furthermore, doing this would afford the program an opportunity to change dimensions without concern in the event that someone has a 16x16 matrix.
-6. Provide an area to show the current color.
-7. Allow user to "turn off" led square by right clicking.
-8. Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
-9. Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
-10. Integrate text display.  This would also be easy using the Adafruit Library's existing code.
-11. Add to mabiesen.github.io. Maybe a video iframe of the tutorial.
-12. ADD A TUTORIAL! It would be fun and provide added value:
+- [] Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
+- [] I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
+- [] Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
+- [x] Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective.  Reduced potential errors by distinguishing buttons from matrix boxes
+- [] Provide an area to show the current color.
+- [x] Allow user to "turn off" led square by right clicking.
+- [] Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
+- [] Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
+- [] Integrate text display.  This would also be easy using the Adafruit Library's existing code.
+- [] Add to mabiesen.github.io. Maybe a video iframe of the tutorial.
+- [] ADD A TUTORIAL! It would be fun and provide added value:
 * First integrate the text features from Adafruit's library
 * Provide animated record functionality such that stored files can be displayed pixel-by-pixel to the matrix in the intended order, proviing the illusion of animation.
 * Create folder to store tutorial data
