@@ -87,13 +87,21 @@ def mouseover(event):
             if rect < 1025:
                 changeboxcolor(rect,currentcolor)
 
-#CLICK EVENTS FOR MATRIX
-def click(event):
+#CLICK EVENTS FOR MATRIX BOXES
+def leftclick(event):
     global colorcoords
     if C.find_withtag(CURRENT):
         rect = C.find_withtag("current")[0]
         if rect < 1025:
             changeboxcolor(rect,currentcolor)
+            C.update_idletasks()
+
+def rightclick(event):
+    global colorcoords
+    if C.find_withtag(CURRENT):
+        rect = C.find_withtag("current")[0]
+        if rect < 1025:
+            changeboxcolor(rect,"#000000")
             C.update_idletasks()
 
 #BUTTON CLICK EVENTS
@@ -258,7 +266,8 @@ def getColor():
     return selectedhex
 
 #Bind click event to all canvas objects
-C.bind("<Button-1>", click)
+C.bind("<Button-1>", leftclick)
+C.bind("<Button-3>", rightclick)
 
 #End of Tkinter loop
 root.mainloop()
