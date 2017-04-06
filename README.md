@@ -31,17 +31,17 @@ Please insure you have Python installed prior to downloading this program.  If y
 ## Work To Be Done as of 4/5/2017
 
 - [x] Change buttons to actual buttons.  Currently they are painted rectangles that act as buttons.
-- [] Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
-- [] I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
-- [] Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
+- [ ] Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
+- [ ] I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
+- [ ] Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
 - [x] Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective.  Reduced potential errors by distinguishing buttons from matrix boxes
-- [] Provide an area to show the current color.
+- [ ] Provide an area to show the current color.
 - [x] Allow user to "turn off" led square by right clicking.
-- [] Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
-- [] Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
-- [] Integrate text display.  This would also be easy using the Adafruit Library's existing code.
-- [] Add to mabiesen.github.io. Maybe a video iframe of the tutorial.
-- [] ADD A TUTORIAL! It would be fun and provide added value:
+- [ ] Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
+- [ ] Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
+- [ ] Integrate text display.  This would also be easy using the Adafruit Library's existing code.
+- [ ] Add to mabiesen.github.io. Maybe a video iframe of the tutorial.
+- [ ] ADD A TUTORIAL! It would be fun and provide added value:
 * First integrate the text features from Adafruit's library
 * Provide animated record functionality such that stored files can be displayed pixel-by-pixel to the matrix in the intended order, proviing the illusion of animation.
 * Create folder to store tutorial data
