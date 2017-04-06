@@ -184,7 +184,7 @@ startprogram()
 #...............................
 
 #Change box color.  Paints the box a new color
-#If user has opted for live display, displays to LED matrix
+#If user has opted for live display, displays to LED matrix using livematrix.py
 def changeboxcolor(rect, color):
 	global colorcoords
 	coord = converttoletter(rect)
@@ -258,13 +258,6 @@ def getColor():
     if selectedhex is None:
         selectedhex = currentcolor
     return selectedhex
-
-#.........................
-#This next section is for livedisplay only
-#.........................
-
-#LIVE WORK WITH LED MATRIX DISPLAY DONE IN LIVEMATRIX.PY
-
 
 #Bind click event to all canvas objects
 C.bind("<Button-1>", click)
