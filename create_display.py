@@ -100,31 +100,34 @@ def click(event):
     global paintbrushon
     if C.find_withtag(CURRENT):
         rect = C.find_withtag("current")[0]
+        recttags = C.gettags(rect)
+        namedrect = recttags[0]
+        print(C.gettags(rect))
         if rect < 1025:
             changeboxcolor(rect,currentcolor)
             C.update_idletasks()
-        elif rect == 1025:
+        elif namedrect == "colorselection":
             changecurrentcolor()
-        elif rect == 1026:
+        elif namedrect == "fillblack":
             x = 1024
             while x > 0:
                 changeboxcolor(x, "#000000")
                 x = x-1
-        elif rect == 1027:
+        elif namedrect == "fillcolor":
             x = 1024
             while x > 0:
                 changeboxcolor(x, currentcolor)
                 x = x-1
-        elif rect ==1028:
+        elif namedrect == "tempsave":
             copytempcoords()
-        elif rect == 1029:
+        elif namedrect == "tempdisplay":
             displayimage()
-        elif rect == 1030:
+        elif namedrect == "savefile":
             filename = util.getfilename()
             printcoords(filename)
-        elif rect == 1031:
+        elif namedrect == "displayfile":
             getfilecoords()
-        elif rect == 1032:
+        elif namedrect == "paintbrush":
             if paintbrushon == False:
                 paintbrushon = True
             else:
@@ -134,10 +137,11 @@ def click(event):
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons(buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace):
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
+    mybuttontags = ("colorselection", "fillblack", "fillcolor", "tempsave", "tempdisplay", "savefile", "displayfile", "paintbrush")
     x=0
     while x < 8:
         buttoncurrenty = buttonstarty + (x * buttonspace)
-        C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x])
+        C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x], tags=mybuttontags[0])
         x = x + 1
 
 #Create labesls that will be used for our buttons
