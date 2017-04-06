@@ -37,15 +37,6 @@ myplatform = platform.system()
 
 #Set sysvariables globally
 #THESE VALUES MEAN NOTHING, this is being done to insure variables global
-buttonstartx = 1300
-buttonendx = 1400
-buttonstarty = 10
-buttonyheight = 40
-buttonspace = 50
-labelstartx = 900
-labelstarty = 30
-labelspace = 50
-matrixspace = 40
 picturesdir = "pictures/"
 
 #Set our global variables that are not system dependent
@@ -69,15 +60,6 @@ C.pack()
 
 #define some system dependent variables
 def definesysvariables():
-    global buttonstartx
-    global buttonendx
-    global buttonstarty
-    global buttonyheight
-    global buttonspace
-    global labelstartx
-    global labelstarty
-    global labelspace
-    global matrixspace
     global picturesdir
     if myplatform == "Windows":
         buttonstartx = 700
@@ -101,6 +83,7 @@ def definesysvariables():
         labelspace = 50
         matrixspace = 40
         picturesdir = "pictures/"
+	return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, labelstartx, labelstarty, labelspace, matrixspace)
 
 #BOX ON ENTER EVENT
 def mouseover(event):
@@ -149,7 +132,7 @@ def click(event):
 
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
-def createbuttons():
+def createbuttons(buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace):
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
     x=0
     while x < 8:
@@ -160,7 +143,7 @@ def createbuttons():
 #Create labesls that will be used for our buttons
 #Labels placed to side of buttton to avoid object index clash when button is clicked
 #Labels are created after buttons to insure that buttons are assigned the correct index
-def createbuttonlabels():
+def createbuttonlabels(labelstartx, labelstarty, labelspace):
     mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
     x = 0
     while x < 8:
@@ -169,7 +152,7 @@ def createbuttonlabels():
 
 #Create the grid.  Simultaneously add to output array
 #Create grid is called first to insure that box object have the correct indices
-def creategrid():
+def creategrid(matrixspace):
     global colorcoords
     global coordcomp
     alphabetrows = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F']
@@ -192,10 +175,10 @@ def creategrid():
 #These function calls kicks off program by creating grid and buttons for use
 #I placed these calls down here, after the program has read the functions that are being called
 def startprogram():
-    definesysvariables()
-    creategrid()
-    createbuttons()
-    createbuttonlabels()
+    lov = definesysvariables()
+    creategrid(lov[8])
+    createbuttons(lov[0], lov[1], lov[2], lov[3], lov[4])
+    createbuttonlabels(lov[5], lov[6], lov[7])
 #kicks off the program by creating grid, buttons and labels
 startprogram()
 
