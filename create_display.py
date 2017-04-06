@@ -121,7 +121,8 @@ def buttonclick(button):
         filename = util.getfilename()
         printcoords(filename)
     elif button == 6:
-        getfilecoords()
+        filename = util.getfilename()
+        getfilecoords(filename)
     elif button == 7:
         if paintbrushon == False:
             paintbrushon = True
@@ -182,7 +183,6 @@ startprogram()
 #All functions below this line are related to in-program events
 #...............................
 
-
 #Change box color.  Paints the box a new color
 #If user has opted for live display, displays to LED matrix
 def changeboxcolor(rect, color):
@@ -193,10 +193,8 @@ def changeboxcolor(rect, color):
 	if livedisplay == True:
 		livematrix.livereading(coord, color)
 
-
 #use file coordinates to populate pictures on screen
-def getfilecoords():
-    rawname = util.getfilename()
+def getfilecoords(rawname):
     abs_file_path = util.fullfilepath(rawname)
     file = open(abs_file_path, "r")
     for line in file:
@@ -206,7 +204,6 @@ def getfilecoords():
             if colonsplit[0] != '':
                 coord = converttonumber(colonsplit[0])
                 changeboxcolor(coord,colonsplit[1])
-
 
 #write coordinates to file located in python project subdirectory
 def printcoords(filename):
@@ -272,6 +269,5 @@ def getColor():
 #Bind click event to all canvas objects
 C.bind("<Button-1>", click)
 
-
 #End of Tkinter loop
-root.mainloop(  )
+root.mainloop()
