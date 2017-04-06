@@ -92,8 +92,6 @@ def click(event):
     global colorcoords
     if C.find_withtag(CURRENT):
         rect = C.find_withtag("current")[0]
-        recttags = C.gettags(rect)
-        namedrect = recttags[0]
         if rect < 1025:
             changeboxcolor(rect,currentcolor)
             C.update_idletasks()
