@@ -67,9 +67,6 @@ def definesysvariables():
         buttonstarty = 10
         buttonyheight = 40
         buttonspace = 50
-        labelstartx = 900
-        labelstarty = 30
-        labelspace = 50
         matrixspace = 20
         picturesdir = "pictures\\"
     if myplatform == "Linux":
@@ -78,12 +75,9 @@ def definesysvariables():
         buttonstarty = 10
         buttonyheight = 40
         buttonspace = 50
-        labelstartx = 1580
-        labelstarty = 30
-        labelspace = 50
         matrixspace = 40
         picturesdir = "pictures/"
-    return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, labelstartx, labelstarty, labelspace, matrixspace)
+    return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, matrixspace)
 
 #BOX ON ENTER EVENT
 def mouseover(event):
@@ -93,65 +87,60 @@ def mouseover(event):
             if rect < 1025:
                 changeboxcolor(rect,currentcolor)
 
-#CLICK EVENTS
-#Handles all click events
+#CLICK EVENTS FOR MATRIX
 def click(event):
     global colorcoords
-    global paintbrushon
     if C.find_withtag(CURRENT):
         rect = C.find_withtag("current")[0]
         recttags = C.gettags(rect)
         namedrect = recttags[0]
-        print(C.gettags(rect))
         if rect < 1025:
             changeboxcolor(rect,currentcolor)
             C.update_idletasks()
-        elif namedrect == "colorselection":
-            changecurrentcolor()
-        elif namedrect == "fillblack":
-            x = 1024
-            while x > 0:
-                changeboxcolor(x, "#000000")
-                x = x-1
-        elif namedrect == "fillcolor":
-            x = 1024
-            while x > 0:
-                changeboxcolor(x, currentcolor)
-                x = x-1
-        elif namedrect == "tempsave":
-            copytempcoords()
-        elif namedrect == "tempdisplay":
-            displayimage()
-        elif namedrect == "savefile":
-            filename = util.getfilename()
-            printcoords(filename)
-        elif namedrect == "displayfile":
-            getfilecoords()
-        elif namedrect == "paintbrush":
-            if paintbrushon == False:
-                paintbrushon = True
-            else:
-                paintbrushon = False
+
+#BUTTON CLICK EVENTS
+def buttonclick(button):
+    global paintbrushon
+    if button == 0:
+        changecurrentcolor()
+    elif button == 1:
+        x = 1024
+        while x > 0:
+            changeboxcolor(x, "#000000")
+            x = x-1
+    elif button == 2:
+        x = 1024
+        while x > 0:
+            changeboxcolor(x, currentcolor)
+            x = x-1
+    elif button == 3:
+        copytempcoords()
+    elif button == 4:
+        displayimage()
+    elif button == 5:
+        filename = util.getfilename()
+        printcoords(filename)
+    elif button == 6:
+        getfilecoords()
+    elif button == 7:
+        if paintbrushon == False:
+            paintbrushon = True
+        else:
+            paintbrushon = False
 
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons(buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace):
     buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
     mybuttontags = ("colorselection", "fillblack", "fillcolor", "tempsave", "tempdisplay", "savefile", "displayfile", "paintbrush")
+    mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
     x=0
     while x < 8:
         buttoncurrenty = buttonstarty + (x * buttonspace)
-        C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x], tags=mybuttontags[0])
-        x = x + 1
-
-#Create labesls that will be used for our buttons
-#Labels placed to side of buttton to avoid object index clash when button is clicked
-#Labels are created after buttons to insure that buttons are assigned the correct index
-def createbuttonlabels(labelstartx, labelstarty, labelspace):
-    mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
-    x = 0
-    while x < 8:
-        C.create_text(labelstartx,labelstarty + (x * labelspace), text=mylabels[x], font=("Helvetica",14))
+        #C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x], tags=mybuttontags[x])
+        b = Button(root, text=mylabels[x], command=lambda j=x: buttonclick(j), font=("Helvetica",14))
+        b.pack()
+        b.place(x=buttonstartx, y=buttoncurrenty, height=buttonyheight)
         x = x + 1
 
 #Create the grid.  Simultaneously add to output array
@@ -180,9 +169,8 @@ def creategrid(matrixspace):
 #I placed these calls down here, after the program has read the functions that are being called
 def startprogram():
     lov = definesysvariables()
-    creategrid(lov[8])
+    creategrid(lov[5])
     createbuttons(lov[0], lov[1], lov[2], lov[3], lov[4])
-    createbuttonlabels(lov[5], lov[6], lov[7])
 #kicks off the program by creating grid, buttons and labels
 startprogram()
 
@@ -220,7 +208,7 @@ def getfilecoords():
                 changeboxcolor(coord,colonsplit[1])
 
 
-#print coordinates to file located in python project subdirectory
+#write coordinates to file located in python project subdirectory
 def printcoords(filename):
     global colorcoords
     abs_file_path = util.fullfilepath(filename)
