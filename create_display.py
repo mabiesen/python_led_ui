@@ -79,6 +79,15 @@ def definesysvariables():
         picturesdir = "pictures/"
     return (buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace, matrixspace)
 
+#MIDDLECLICK EVENT
+#Used to set paintburshon variable
+def middleclick(event):
+	global paintbrushon
+	if paintbrushon == True:
+		paintbrushon = False
+	else:
+		paintbrushon = True
+
 #BOX ON ENTER EVENT
 def mouseover(event):
     if paintbrushon == True:
@@ -267,6 +276,7 @@ def getColor():
 
 #Bind click event to all canvas objects
 C.bind("<Button-1>", leftclick)
+C.bind("<Button-2>", middleclick)
 C.bind("<Button-3>", rightclick)
 
 #End of Tkinter loop
