@@ -147,11 +147,10 @@ def buttonclick(button):
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
 def createbuttons(buttonstartx, buttonendx, buttonstarty, buttonyheight, buttonspace):
-    buttoncolor = ("yellow","orange","red","violet","black","green","brown","blue")
-    mybuttontags = ("colorselection", "fillblack", "fillcolor", "tempsave", "tempdisplay", "savefile", "displayfile", "paintbrush")
-    mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File", "Paintbrush")
+    mybuttontags = ("colorselection", "fillblack", "fillcolor", "tempsave", "tempdisplay", "savefile", "displayfile")
+    mylabels = ("Select a Color","Fill Matrix Black","Fill Matrix Color","Temp Save","Temp Display","Save To File", "Pull From File")
     x=0
-    while x < 8:
+    while x < 7:
         buttoncurrenty = buttonstarty + (x * buttonspace)
         #C.create_rectangle(buttonstartx,buttoncurrenty,buttonendx, buttoncurrenty + buttonyheight, fill=buttoncolor[x], tags=mybuttontags[x])
         b = Button(root, text=mylabels[x], command=lambda j=x: buttonclick(j), font=("Helvetica",14))
