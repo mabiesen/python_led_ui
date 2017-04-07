@@ -153,6 +153,9 @@ def createbuttons(buttonstartx, buttonendx, buttonstarty, buttonyheight, buttons
         b.place(x=buttonstartx, y=buttoncurrenty, height=buttonyheight)
         x = x + 1
 
+def createcurrentcolorbox(buttonstartx, buttonstarty, buttonendx, buttonyheight):
+    C.create_rectangle(buttonstartx + 400, buttonstarty, buttonendx + 400, buttonstarty + buttonyheight, fill=currentcolor)
+
 #Create the grid.  Simultaneously add to output array
 #Create grid is called first to insure that box object have the correct indices
 def creategrid(matrixspace):
@@ -180,6 +183,7 @@ def creategrid(matrixspace):
 def startprogram():
     lov = definesysvariables()
     creategrid(lov[5])
+    createcurrentcolorbox(lov[0], lov[2], lov[1], lov[3])
     createbuttons(lov[0], lov[1], lov[2], lov[3], lov[4])
 #kicks off the program by creating grid, buttons and labels
 startprogram()
@@ -258,6 +262,7 @@ def changecurrentcolor():
     global currentcolor
     selectedhex = getColor()
     currentcolor = selectedhex
+    C.itemconfig(1025, fill=currentcolor)
 
 #Color selection from Tkinter colorchooser module
 def getColor():

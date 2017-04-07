@@ -48,7 +48,7 @@ Please insure you have Python installed prior to downloading this program.  If y
 - [ ] I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
 - [x] Paintbrush feature should be fixed.  Create middle mouse button feature to toggle on and off.
 - [x] Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective.  Reduced potential errors by distinguishing buttons from matrix boxes
-- [ ] Provide an area to show the current color.
+- [x] Provide an area to show the current color.
 - [x] Allow user to "turn off" led square by right clicking.
 - [ ] Better controls for window sizing.  Different Tkinter versions appear to affect the size of our matrix display.
 - [ ] Integrate image display for simple images.  This should be relatively easy using the Adafruit Library's existing code.
@@ -61,4 +61,3 @@ Please insure you have Python installed prior to downloading this program.  If y
 * Create images and animations to display during the tutorial.
 * Write the code to display changes in action
 * Add a tutorial button
-
