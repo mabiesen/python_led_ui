@@ -138,11 +138,6 @@ def buttonclick(button):
     elif button == 6:
         filename = util.getfilename()
         getfilecoords(filename)
-    elif button == 7:
-        if paintbrushon == False:
-            paintbrushon = True
-        else:
-            paintbrushon = False
 
 #Create buttons that will be used in the game
 #Buttons immediately created after grid and assigned index values 1025 through number of buttons
