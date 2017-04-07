@@ -33,7 +33,7 @@ Please insure you have Python installed prior to downloading this program.  If y
 - [x] Change buttons to actual buttons.  Currently they are painted rectangles that act as buttons.
 - [ ] Provide a more program accessible way to request user information.  Currently the shell or terminal must be used to save or retrieve files, this is not very user friendly.  For retrieving files, provide a drop down selection.
 - [ ] I would prefer a live color wheel for color selection.  The current popup menu paradigm is not ideal.
-- [ ] Paintbrush feature should be fixed inverted.  Perhaps use mousedown detection to set a switch variable?
+- [x] Paintbrush feature should be fixed.  Create middle mouse button feature to toggle on and off.
 - [x] Currently, the code identifies Tkinter objects by their "indexed" tags.  This works but is sloppy coding from my perspective.  Reduced potential errors by distinguishing buttons from matrix boxes
 - [ ] Provide an area to show the current color.
 - [x] Allow user to "turn off" led square by right clicking.
