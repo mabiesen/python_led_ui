@@ -24,9 +24,22 @@ Please insure you have Python installed prior to downloading this program.  If y
 7. Run the file titled create_display.py from the command line as a superuser
 8. When prompted, type 'y' to allow for real time use with the LED Matrix.
 
-*NOTE: At this time, you must refer to the Python shell(or your terminal) to save and retrieve stored file data*
+## Directions for use
+1. Open up the project either through the terminal or your idle.
+2. Play! The program offers the following features:
+* Change current color (designated page button)
+* Fill matrix black, used to clear an existing image (designated page button)
+* Fill matrix color, used to fill matrix current color (designated button)
+* Temp save - temporarily stores drawing for in program use (designated button)
+* Temp display - display temporarily stored images (designated button, great for changing picture backgrounds)
+* Store pictures to file (designated button)
+* Retrieve pictures from file (designated button)
 
-*NOTE: When using the paintbrush feature, click and hold to stop painting.  This is counterintuitive and is on my todo list*
+* Paint a square the current color (left click)
+* Paint a square black (right click)
+* Toggle paint feature (middle click)
+
+*NOTE: At this time, you must refer to the Python shell(or your terminal) to save and retrieve stored file data*
 
 ## Work To Be Done as of 4/5/2017
 
