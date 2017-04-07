@@ -37,7 +37,7 @@ Please insure you have Python installed prior to downloading this program.  If y
 
 * Paint a square the current color (left click)
 * Paint a square black (right click)
-* Toggle paint feature (middle click)
+* Toggle paint feature (middle click / mousewheel click)
 
 *NOTE: At this time, you must refer to the Python shell(or your terminal) to save and retrieve stored file data*
 
